@@ -2,7 +2,8 @@
 -- It is also helpful to include some test data
 -- Table Structure
 CREATE TABLE tasks (
-    task VARCHAR(120) NOT NULL;
+    id SERIAL PRIMARY KEY,
+    task VARCHAR(120) NOT NULL
 );
 
 INSERT INTO tasks ("task")
