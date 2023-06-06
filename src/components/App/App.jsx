@@ -47,12 +47,29 @@ function App () {
     });
 
     setTask('');
-  };
-  
-  
+  };// used to submit button 
+
+  const updateTask = (event) => {
+    setTask(event.target.value);
+  }// to update the task
+
   return (
-    <div>
-      <h1>TO DO APP</h1>
+    <div classNAme="App">
+      <Header/>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="Task">Task:</label>
+        <input type="text" placeholder='Add New Task' value={task} onChange={updateTask} />
+      </form>
+    <h2>Task List</h2>
+    <main>
+      <ul>
+        {taskList.map(task => (
+          <li key={task.name}>
+            {task.task}
+          </li>
+        ))}
+      </ul>
+    </main>
     </div>
   );
 
