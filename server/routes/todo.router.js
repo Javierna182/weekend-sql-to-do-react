@@ -48,9 +48,22 @@ router.put('/:id', (req, res) => {// used id to get the id in the table in posti
         console.error(error);
         res.sendStatus(500);
     })
-})
-
+})//PUT ends
 
 // DELETE -- -- Setup a DELETE route to delete a task to the database
+router.delete('/:id', (req, res) => {// used id to get the id in the table in postico
+    let taskId = req.params.id;//to get the parameter of each id
+    let queryDelete = `
+    DELETE FROM "tasks" WHERE id = $1;
+    `;//deletes
+    pool.query(queryDelete, [taskId])
+    .then(() => {
+        res.sendStatus(204)
+    })
+    .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+    })
+})//DELETES ends
 
 module.exports = router;
