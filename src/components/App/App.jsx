@@ -1,6 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
-// import { useEffect, useState } from 'react';
+// import {useState} from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function getTask(){
@@ -28,6 +28,27 @@ function addTask(task){
 }
 
 function App () {
+  const [taskList, setTaskList] = useState([]);
+  const [task, setTask] = useState('');
+
+  useEffect(() => {
+    console.log('Fetching Tasks!');
+    getTask().then(task => setTaskList(task));
+  }, []);
+
+  //add function addTask
+
+  const handleSubmit = (event) => {
+    console.log({event});
+    event.preventDefault();
+
+    addTask({ task: task}).then(() => {
+      getTask().then(setTaskList);
+    });
+
+    setTask('');
+  };
+  
   
   return (
     <div>
