@@ -4,10 +4,10 @@ const pool = require('../modules/pool.js');
 
 // GET -- Setup a GET route to get all the tasks from the database
 router.get('/', (req, res) => {
-    const sqlText = `SELECT * FROM "tasks" ORDERED BY task;`;
+    const sqlText = `SELECT * FROM "tasks" ORDER BY task;`;
     pool.query(sqlText)
     .then((result) => {
-        console.log(`Got stuff back from the database`, result);
+        console.log(`Got stuff back from the database`, result.rows);
         res.send(result.rows)
     })
     .catch((error) => {
