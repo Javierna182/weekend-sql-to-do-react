@@ -9,12 +9,13 @@ import  Header  from '../Header/Header.jsx';
 
 function App () {
   const [taskList, setTaskList] = useState([]);
+  const [taskCompleted, setTaskCompleted ] = useState(false);
   const [task, setTask] = useState('');
 
   useEffect(() => {
     console.log('Fetching Tasks!');
     getTask().then(task => setTaskList(task));
-  }, []);
+  }, []);// end useEffect
 
   //add function addTask
   function getTask(){
@@ -52,22 +53,43 @@ function App () {
     .catch((error) => {
       console.error(error);
     });
-  }//end delete
+  }//end deleteTask
+
+  function editTask(id){
+    let taskId = {task, taskCompleted}
+    return fetch(`/todo/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(taskId),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((response) => {
+      console.log(response);
+      getTask().then(task => setTaskList(task));
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }//end editTask
 
   const handleSubmit = (event) => {
     console.log({event});
     event.preventDefault();
 
-    addTask({ task: task}).then(() => {
+    addTask({ task: task, taskCompleted: taskCompleted}).then(() => {
       getTask().then(setTaskList);
     });
 
     setTask('');
+    setTaskCompleted('');
   };// used to submit button 
 
   const updateTask = (event) => {
     setTask(event.target.value);
   };// to update the task
+
+  const udpateCompletedTask = (event) => {
+    setTaskCompleted(event.target.value);
+  };//to update completedTask
 
   return (
     <div className="App">
@@ -84,6 +106,8 @@ function App () {
           <li key={task.id}>
             {task.task}
             <button type="button" onClick={() => deleteTask(task.id)}>delete</button>
+            <button type="button" onClick={() => editTask(task.id)}>Edit</button>
+            <button type="button" onClick={() => completTask(task.id)}>completed</button>
             <button>edit</button>
             <button>completed</button>
           </li>

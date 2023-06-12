@@ -20,9 +20,9 @@ router.get('/', (req, res) => {
 router.post('/', (req,res) => {
     const task = req.body;
     console.log('adding this task:' ,task);
-    const sqlText = `INSERT INTO "tasks" (task)
-                    VALUES($1)`;
-    pool.query(sqlText, [task.task])
+    const sqlText = `INSERT INTO "tasks" ("task", "completed")
+                    VALUES($1, $2)`;
+    pool.query(sqlText, [task.task, task.completed])
     .then((result) => {
         console.log(`Added task to the database`, task);
         res.sendStatus(201);
@@ -33,14 +33,14 @@ router.post('/', (req,res) => {
     })                 
 })//POST ends
 
-// PUT -- Setup a POST route to edit a task to the database
+// PUT -- Setup a PUT route to edit a task to the database
 router.put('/:id', (req, res) => {// used id to get the id in the table in postico
     let updatedTask = req.body;//to request a new addition to the body
     let taskId = req.params.id;//to get the parameter of each id
     let queryUpdate = `
-    UPDATE "tasks" SET "task" = $1 WHERE id = $2;
+    UPDATE "tasks" SET "task" = $1, completed =$2 WHERE id = $3;
     `;
-    pool.query(queryUpdate, [updatedTask.task, taskId])
+    pool.query(queryUpdate, [updatedTask.task, updatedTask.completed, taskId])
     .then(() => {
         res.sendStatus(204)
     })
