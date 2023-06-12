@@ -4,7 +4,7 @@
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
     task VARCHAR(120) NOT NULL,
-    completed BOOL DEFAULT FALSE,
+    completed BOOL DEFAULT FALSE
 );
 
 INSERT INTO tasks ("task")

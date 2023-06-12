@@ -71,6 +71,21 @@ function App () {
     });
   }//end editTask
 
+  function completdTask(id) {
+    return fetch(`/todo/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(task),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((response) => {
+      console.log(response);
+      getTask().then(task => { setTaskList(task)});
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
   const handleSubmit = (event) => {
     console.log({event});
     event.preventDefault();
@@ -107,9 +122,7 @@ function App () {
             {task.task}
             <button type="button" onClick={() => deleteTask(task.id)}>delete</button>
             <button type="button" onClick={() => editTask(task.id)}>Edit</button>
-            <button type="button" onClick={() => completTask(task.id)}>completed</button>
-            <button>edit</button>
-            <button>completed</button>
+            <button type="button" onClick={() => completdTask(task.id)}>completed</button>
           </li>
         ))}
       </ul>
