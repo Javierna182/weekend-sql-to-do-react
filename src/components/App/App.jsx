@@ -56,11 +56,9 @@ function App () {
     });
   }//end deleteTask
 
-  function editTask(id){
-    let taskId = {task, taskCompleted}
+  function completeTask(id){
     return fetch(`/todo/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(taskId),
       headers: { 'Content-Type': 'application/json' }
     })
     .then((response) => {
@@ -70,22 +68,7 @@ function App () {
     .catch((error) => {
       console.error(error);
     });
-  }//end editTask
-
-  // function completdTask(id) {
-  //   return fetch(`/todo/${id}`, {
-  //     method: 'PUT',
-  //     body: JSON.stringify(task),
-  //     headers: { 'Content-Type': 'application/json' }
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //     getTask().then(task => { setTaskList(task)});
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // }// end completedTask
+  }//end completeTask
 
   const handleSubmit = (event) => {
     console.log({event});
@@ -108,7 +91,7 @@ function App () {
   };//to update completedTask
 
   return (
-    <div className='Background'>
+    
     <div className="AppBody">
       <Header/>
       <form onSubmit={handleSubmit}>
@@ -121,21 +104,22 @@ function App () {
       <ul>
         {taskList && taskList.map(task => (
           <div className='listDiv' key={task.id}>
-            {task.task}
+            <div className={task.completed ? 'completed' : null}>{task.task}</div>
+            {/* {task.completed ? <div className='completed'>DONE</div> : <div class='notCompleted'>NOT DONE</div> } */}
             <button className='deleteBtn' type="button" onClick={() => deleteTask(task.id)}>Delete</button>
-            <button className='completeBtn' type="button" onClick={() => editTask(task.id)}>Complete</button>
+            <button className='completeBtn' type="button" onClick={() => completeTask(task.id)}>Complete</button>
             {/* <button type="button" onClick={() => completdTask(task.id)}>completed</button> */}
           </div>
         ))}
       </ul>
     </main>
     </div>
-    </div>
+    
   );
 
 }
 
 export default App
 
-
+{/* <div className={task.status ? 'completed' : null}>{task.task}</div> */}
 // {task.completed ? <div class=“completed”>DONE</div> : <div class=“not completed”>NOT DONE</div> }

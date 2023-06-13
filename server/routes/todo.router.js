@@ -35,12 +35,14 @@ router.post('/', (req,res) => {
 
 // PUT -- Setup a PUT route to edit a task to the database
 router.put('/:id', (req, res) => {// used id to get the id in the table in postico
-    let updatedTask = req.body;//to request a new addition to the body
+
     let taskId = req.params.id;//to get the parameter of each id
     let queryUpdate = `
-    UPDATE "tasks" SET "task" = $1, completed =$2 WHERE id = $3;
+    UPDATE "tasks" SET "completed" = NOT "completed" WHERE id = $1;
     `;
-    pool.query(queryUpdate, [updatedTask.task, updatedTask.completed, taskId])
+    console.log(queryUpdate);
+    
+    pool.query(queryUpdate, [taskId])
     .then(() => {
         res.sendStatus(204)
     })
