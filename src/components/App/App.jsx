@@ -7,6 +7,7 @@ import  Header  from '../Header/Header.jsx';
 
 
 
+
 function App () {
   const [taskList, setTaskList] = useState([]);
   const [taskCompleted, setTaskCompleted ] = useState(false);
@@ -71,20 +72,20 @@ function App () {
     });
   }//end editTask
 
-  function completdTask(id) {
-    return fetch(`/todo/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(task),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then((response) => {
-      console.log(response);
-      getTask().then(task => { setTaskList(task)});
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
+  // function completdTask(id) {
+  //   return fetch(`/todo/${id}`, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(task),
+  //     headers: { 'Content-Type': 'application/json' }
+  //   })
+  //   .then((response) => {
+  //     console.log(response);
+  //     getTask().then(task => { setTaskList(task)});
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+  // }// end completedTask
 
   const handleSubmit = (event) => {
     console.log({event});
@@ -107,26 +108,28 @@ function App () {
   };//to update completedTask
 
   return (
-    <div className="App">
+    <div className='Background'>
+    <div className="AppBody">
       <Header/>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="Task">Task:</label>
-        <input type="text" placeholder='Add New Task' value={task} onChange={updateTask} />
-        <button type="submit">Add New Task</button>
+        <label className="TaskLab" htmlFor="Task">Task:</label>
+        <input className='inputAdd' type="text" placeholder='Add New Task' value={task} onChange={updateTask} />
+        <button  className='submitBtn' type="submit">Submit</button>
       </form>
-    <h2>Task List</h2>
+    <h2 className='h2Text'>Task List</h2>
     <main>
       <ul>
         {taskList && taskList.map(task => (
-          <li key={task.id}>
+          <div className='listDiv' key={task.id}>
             {task.task}
-            <button type="button" onClick={() => deleteTask(task.id)}>delete</button>
-            <button type="button" onClick={() => editTask(task.id)}>Edit</button>
-            <button type="button" onClick={() => completdTask(task.id)}>completed</button>
-          </li>
+            <button className='deleteBtn' type="button" onClick={() => deleteTask(task.id)}>Delete</button>
+            <button className='completeBtn' type="button" onClick={() => editTask(task.id)}>Complete</button>
+            {/* <button type="button" onClick={() => completdTask(task.id)}>completed</button> */}
+          </div>
         ))}
       </ul>
     </main>
+    </div>
     </div>
   );
 

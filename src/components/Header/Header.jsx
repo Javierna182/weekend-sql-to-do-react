@@ -3,7 +3,7 @@ import './Header.css';
 
 function Header() {
     return (
-        <header className="banner-header">
+        <header className="App-header">
             <h1>TO DO APP</h1>
             <h2>What needs to be done?</h2>
         </header>
