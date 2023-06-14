@@ -1,9 +1,43 @@
-# Project Name
+# SQL To-Do APP
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+This is a SQL To-Do APP built with Node, Express, SQL, and React.
 
-## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+### The To-Do APP
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+This is an interface that allows an user to create a Task. 
+
+When the Task is created, it gets stored inside of a database (SQL). When a Task is created the front end gets refreshed to show all tasks that need to be completed.
+
+Each Task has an option to 'Complete' or 'Delete'. 
+
+When a Task is complete, its visual representation changes on the front end to be scratched and highlight green. 
+
+Whether or not a Task is completed it will be stored in the database. 
+
+Deleting a Task removes it both from the front end as well as the Database.
+
+### Setup
+
+Create the database. Create a new database with the database.sql.
+
+npm install
+npm run server
+npm run client
+
+Technologies
+------------
+* Node
+* Express
+* SQL
+* React
+
+### Images of the application
+
+![Wireframe](to-do-basic.png)
+![Wireframe](to-do-add.png)
+![Wireframe](to-do-completed.png)
+
+## Credits
+
+This project was based on an activitie from Prime Academy.

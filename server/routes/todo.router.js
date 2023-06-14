@@ -20,9 +20,9 @@ router.get('/', (req, res) => {
 router.post('/', (req,res) => {
     const task = req.body;
     console.log('adding this task:' ,task);
-    const sqlText = `INSERT INTO "tasks" ("task", "completed")
-                    VALUES($1, $2)`;
-    pool.query(sqlText, [task.task, task.completed])
+    const sqlText = `INSERT INTO "tasks" ("task")
+                    VALUES($1)`;
+    pool.query(sqlText, [task.task])
     .then((result) => {
         console.log(`Added task to the database`, task);
         res.sendStatus(201);
