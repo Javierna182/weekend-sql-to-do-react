@@ -34,9 +34,9 @@ Technologies
 
 ### Images of the application
 
-![Wireframe](images/to-do-basic.png)
-![Wireframe](images/to-do-add.png)
-![Wireframe](images/to-do-completed.png)
+![Wireframe](public/images/to-do-basic.png)
+![Wireframe](public/images/to-do-add.png)
+![Wireframe](public/images/to-do-completed.png)
 
 ## Credits
 
